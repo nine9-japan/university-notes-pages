@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="学年・学期・科目から大学の講義ノートを探し、PDFで読む。">
+  <title>大学講義ノート庫</title>
+  <link rel="stylesheet" href="./catalog.css">
+  <script src="./library.js" defer></script>
+</head>
+<body class="catalog">
+  <header class="catalog-header">
+    <div class="catalog-width masthead">
+      <a class="catalog-brand" href="./"><span class="shelf-mark" aria-hidden="true"><i></i><i></i><i></i></span>大学講義ノート庫</a>
+    </div>
+  </header>
+  <main id="main" class="catalog-width">
+    <p id="loading" class="catalog-state" role="status">ノートを読み込み中…</p>
+    <noscript><p>ノートを表示するには JavaScript を有効にしてください。</p></noscript>
+    <div id="catalog" hidden>
+      <section class="catalog-search" aria-labelledby="find-heading">
+        <h1 id="find-heading">講義ノートを探す</h1>
+        <form id="search-form" role="search">
+          <label class="sr-only" for="note-search">科目名・キーワードで検索</label>
+          <div class="catalog-input">
+            <span class="lens" aria-hidden="true"></span>
+            <input id="note-search" name="q" type="search" placeholder="科目名・キーワードで検索">
+          </div>
+          <button type="submit" class="catalog-primary">検索</button>
+        </form>
+        <button id="filter-toggle" class="filter-disclosure" type="button" aria-expanded="false" aria-controls="filter-options">
+          <span id="filter-label">絞り込み</span><span id="filter-icon" aria-hidden="true">＋</span>
+        </button>
+        <div id="filter-options" class="catalog-filters">
+          <label class="catalog-select">学年<select id="grade"></select></label>
+          <label class="catalog-select">学期<select id="semester"></select></label>
+          <label class="catalog-select">科目<select id="subject"></select></label>
+        </div>
+      </section>
+      <section class="catalog-results" aria-labelledby="list-heading">
+        <div class="catalog-results-head">
+          <h2 id="list-heading" tabindex="-1">講義ノート一覧</h2>
+          <p id="result-count" role="status"></p>
+        </div>
+        <div id="active-filters" class="applied-filters" hidden>
+          <span id="criteria"></span><button id="clear-filters" class="catalog-link" type="button">条件をクリア</button>
+        </div>
+        <p id="empty" class="catalog-state" hidden></p>
+        <ul id="note-list" class="catalog-list"></ul>
+        <nav id="pagination" class="catalog-pager" aria-label="ノート一覧のページ送り" hidden>
+          <button id="previous" type="button">前へ</button>
+          <span id="page-count"></span>
+          <button id="next" type="button">次へ</button>
+        </nav>
+        <aside id="catalog-ad" class="catalog-ad" aria-label="楽天市場の広告" hidden>
+          <p>広告</p>
+          <a href="https://hb.afl.rakuten.co.jp/hsc/59ac83ad.79596c4b.59ac8269.04164c07/?link_type=pict&amp;ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJwaWN0IiwiY29sIjoxLCJjYXQiOiI0NCIsImJhbiI6Mjc5NDg4OSwiYW1wIjpmYWxzZX0%3D" target="_blank" rel="nofollow sponsored noopener">
+            <img src="https://hbb.afl.rakuten.co.jp/hsb/59ac83ad.79596c4b.59ac8269.04164c07/?me_id=1&amp;me_adv_id=2794889&amp;t=pict" width="300" height="300" loading="lazy" alt="楽天市場のポイント企画を見る">
+          </a>
+        </aside>
+      </section>
+    </div>
+    <article id="reader" class="catalog-reader" hidden></article>
+  </main>
+</body>
+</html>
