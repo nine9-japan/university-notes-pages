@@ -1,0 +1,44 @@
+name: Notify Discord on New Notes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - notes.json
+  workflow_dispatch:
+    inputs:
+      note_id:
+        description: "Note ID (or driveFileId) to notify; blank = latest note"
+        required: false
+        type: string
+      dry_run:
+        description: "Print payloads without sending to Discord"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Notify Discord about new notes
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          INPUT_NOTE_ID: ${{ inputs.note_id }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: python3 scripts/notify_discord.py
