@@ -3,7 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="学年・学期・科目から大学の講義ノートを探し、PDFで読む。">
+  <meta name="description" content="講義資料を検索・閲覧するための大学ノートライブラリ。">
+  <meta property="og:title" content="大学講義ノート庫">
+  <meta property="og:description" content="講義資料を検索・閲覧するための大学ノートライブラリ。">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="大学講義ノート庫">
+  <meta name="twitter:description" content="講義資料を検索・閲覧するための大学ノートライブラリ。">
   <title>大学講義ノート庫</title>
   <link rel="stylesheet" href="./catalog.css">
   <script src="./library.js" defer></script>
@@ -14,7 +20,7 @@
       <a class="catalog-brand" href="./"><span class="shelf-mark" aria-hidden="true"><i></i><i></i><i></i></span>大学講義ノート庫</a>
     </div>
   </header>
-  <main id="main" class="catalog-width">
+  <main id="main" class="catalog-width catalog-main">
     <p id="loading" class="catalog-state" role="status">ノートを読み込み中…</p>
     <noscript><p>ノートを表示するには JavaScript を有効にしてください。</p></noscript>
     <div id="catalog" hidden>
@@ -47,7 +53,7 @@
         </div>
         <p id="empty" class="catalog-state" hidden></p>
         <ul id="note-list" class="catalog-list"></ul>
-        <nav id="pagination" class="catalog-pager" aria-label="ノート一覧のページ送り" hidden>
+        <nav id="pagination" class="catalog-pager" aria-label="検索結果のページ送り" hidden>
           <button id="previous" type="button">前へ</button>
           <span id="page-count"></span>
           <button id="next" type="button">次へ</button>

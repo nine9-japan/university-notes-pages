@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大学講義ノート庫</title>
+  <script>
+    // GitHub Pages 用: /notes/<id> 形式のURLを /?note=<id> へ振り替える（Sites版のパス形式URLを再現するため）
+    (function () {
+      var match = location.pathname.match(/^(.*\/)notes\/([^/]+)\/?$/);
+      if (match) {
+        var id = match[2];
+        try {
+          id = decodeURIComponent(id);
+        } catch (error) {
+          // そのまま使う
+        }
+        var params = new URLSearchParams(location.search);
+        params.delete("note");
+        params.set("note", id);
+        location.replace(match[1] + "?" + params.toString());
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./catalog.css">
+</head>
+<body class="catalog">
+  <header class="catalog-header">
+    <div class="catalog-width masthead">
+      <a class="catalog-brand" id="brand-link" href="./"><span class="shelf-mark" aria-hidden="true"><i></i><i></i><i></i></span>大学講義ノート庫</a>
+    </div>
+  </header>
+  <main class="catalog-width catalog-main">
+    <p class="catalog-state">ページが見つかりませんでした。</p>
+    <p><a class="catalog-link" id="top-link" href="./">大学講義ノート庫トップへ</a></p>
+  </main>
+  <script>
+    // プロジェクトページ（/<repo>/ 配下）でもトップリンクが正しくなるよう補正する
+    (function () {
+      var base = location.pathname.split("/").slice(0, 2).join("/") + "/";
+      document.getElementById("brand-link").href = base;
+      document.getElementById("top-link").href = base;
+      var stylesheet = document.querySelector('link[rel="stylesheet"]');
+      if (stylesheet) stylesheet.href = base + "catalog.css";
+    })();
+  </script>
+</body>
+</html>
