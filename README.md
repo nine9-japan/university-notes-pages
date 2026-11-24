@@ -23,3 +23,16 @@
 必須項目は `driveFileId`、`title`、`subject` です。Drive の共有リンクに `resourcekey` がある場合は、`resourceKey` も追加します。既存ノートの `id` は詳細ページのURLに使われます。
 
 各科目フォルダには非掲載のファイルも置けます。一般公開するPDFだけに閲覧権限を付けてください。
+
+## Discord 通知
+
+`main` ブランチの `notes.json` に新しいノートが追加されると、GitHub Actions（`.github/workflows/notify-discord.yml`）が差分を検知して Discord へ自動通知します（既存ノートの編集や過去分の一括送信は行いません）。
+
+### 初期設定
+
+1. Discord の通知先チャンネルで「チャンネルを編集 → 連携サービス → ウェブフック」から Webhook を作成し、URL をコピーします。
+2. このリポジトリの **Settings → Secrets and variables → Actions → New repository secret** で、名前を `DISCORD_WEBHOOK_URL`、値にコピーした Webhook URL を登録します。
+
+### 手動通知・テスト送信
+
+Actions タブの **Notify Discord on New Notes → Run workflow** から手動実行できます。`note_id` を空欄にすると最新1件を通知し、`dry_run` を `true` にすると Discord へ送信せずログ出力のみ確認できます。
