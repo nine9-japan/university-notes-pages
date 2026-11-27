@@ -76,6 +76,7 @@ def build_payload(note: dict[str, Any], site_base_url: str = DEFAULT_SITE_BASE_U
     return {
         "username": "大学ノート庫",
         "allowed_mentions": {"parse": []},
+        "flags": 4096,
         "embeds": [
             {
                 "title": title,
